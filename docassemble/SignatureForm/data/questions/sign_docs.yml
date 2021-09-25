@@ -50,3 +50,10 @@ event: download_signed_doc
 question: |
   Here is a copy of your signed document for your records
 attachment code: signed_document
+---
+id: exit
+event: exit_no_signatures
+question: |
+  You must upload a PDF with at least one digital signature field!
+buttons:
+  - restart

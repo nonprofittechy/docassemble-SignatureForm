@@ -45,7 +45,7 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
 setup(name='docassemble.SignatureForm',
       version='0.0.1',
       description=('A docassemble extension.'),
-      long_description='# docassemble.SignatureForm\n\nA docassemble extension.\n\n## Author\n\nSystem Administrator, admin@lemmalegal.com\n\n',
+      long_description='# docassemble.SignatureForm\r\n\r\nA docassemble extension.\r\n\r\n## Author\r\n\r\nSystem Administrator, admin@lemmalegal.com\r\n\r\n',
       long_description_content_type='text/markdown',
       author='System Administrator',
       author_email='admin@lemmalegal.com',
