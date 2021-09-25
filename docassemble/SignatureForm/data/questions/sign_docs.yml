@@ -1,0 +1,52 @@
+---
+include:
+  - docassemble.AssemblyLine:al_package_unstyled.yml
+---
+metadata:
+  title: |
+    Document sign
+---
+id: interview order
+mandatory: True
+code: |
+  upload_document
+  if not doc_has_signatures:
+    exit_no_signatures
+  else:
+    user_signature
+    download_signed_doc
+---
+id: upload document
+question: |
+  Please upload a PDF document
+fieldS:
+  - Your document: upload_document
+    datatype: file
+    accept: |
+      ".pdf, application/pdf"
+---
+code: |
+  upload_document = next(iter(upload_document)) # uploads are a DAFileCollection, not a DAFile
+  upload_document.instanceName = 'upload_document'
+  
+  fields = upload_document.get_pdf_fields()
+  doc_has_signatures = len(fields) and any(filter(lambda field: field[4] == '/Sig', fields))
+---
+id: sign_doc
+question: |
+  Please sign below
+signature: user_signature  
+---
+attachment:
+  variable name: signed_document
+  pdf template file:
+    code: |
+      upload_document
+  code: |
+    [{field[0]: user_signature} for field in fields]
+---
+id: download
+event: download_signed_doc
+question: |
+  Here is a copy of your signed document for your records
+attachment code: signed_document
