@@ -13,7 +13,6 @@ code: |
   if not doc_has_signatures:
     exit_no_signatures
   else:
-    user_signature
     download_signed_doc
 ---
 id: upload document
@@ -30,12 +29,18 @@ code: |
   upload_document.instanceName = 'upload_document'
   
   fields = upload_document.get_pdf_fields()
-  doc_has_signatures = len(fields) and any(filter(lambda field: field[4] == '/Sig', fields))
+  signature_fields = [field[0] for field in fields if field[4] == "/Sig"]
+  doc_has_signatures = bool(len(signature_fields))
 ---
 id: sign_doc
 question: |
-  Please sign below
-signature: user_signature  
+  ${i}, please sign below
+signature: signatures[i]
+under: |
+  ${ i }
+---
+objects:
+  - signatures: DADict
 ---
 attachment:
   variable name: signed_document
@@ -43,7 +48,7 @@ attachment:
     code: |
       upload_document
   code: |
-    [{field[0]: user_signature} for field in fields]
+    [{signature: signatures[signature]} for signature in signature_fields]
 ---
 id: download
 event: download_signed_doc
