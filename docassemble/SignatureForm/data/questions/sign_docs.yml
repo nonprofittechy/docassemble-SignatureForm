@@ -5,6 +5,15 @@ include:
 metadata:
   title: |
     Document sign
+  logo: |
+    <img height="50px" class="ma_icon" src="/packagestatic/docassemble.IncorpForm/Reidel_logo.svg"><div class="title"></div>
+  title url: |
+    https://www.reidellawfirm.com/
+---
+features:
+  bootstrap theme: docassemble.IncorpForm:bootstrap.min.css
+  css:
+    - docassemble.IncorpForm:styles.css
 ---
 id: interview order
 mandatory: True
